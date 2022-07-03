@@ -39,10 +39,25 @@ var Smoke = function(position) {
 
 Smoke.prototype = Object.create(Particle.prototype);
 
+
+
 Smoke.prototype.display = function(){
     noStroke();
     fill(245, 235, 235, this.timeToLive);
     ellipse(this.position.x, this.position.y,12,12);
+};
+
+var Star = function(position){
+    Particle.call(this, position);
+    this.size = abs(random(5,12));
+};
+
+Star.prototype = Object.create(Particle.prototype);
+
+Star.prototype.constructor = Star;
+
+Star.prototype.display = function(){
+    image("cute/Star",this.position.x,this.position.y,this.size,this.size);
 };
 
 var ParticleSystem = function(position) {
@@ -52,7 +67,12 @@ var ParticleSystem = function(position) {
 
 ParticleSystem.prototype.addParticle = function() {
     this.particles.push(new Particle(this.origin));
-    this.particles.push(new Smoke(this.origin));
+    if (random(0,1)>=0.5){
+        this.particles.push(new Smoke(this.origin));
+    }else{
+        this.particles.push(new Star(this.origin));
+    }
+    
 };
 
 ParticleSystem.prototype.run = function(){
