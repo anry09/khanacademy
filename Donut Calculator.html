@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Challenge: Donut Calculator</title>
+    </head>
+    <body>
+
+    <h1>Donut Calculator</h1>
+    
+    <p>Winston eats 3 donuts a day. How many donuts will he eat in his lifetime?</p>
+    
+    <form id="calculator-form">
+        <label>
+            Winston's final age:
+            <input type="number" name="age">
+        </label>
+        <button type="submit">Calculate</button>
+        <div id="calculator-results"></div>
+    </form>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+    var calcDonuts = function(years) {
+        return years * 3 * 365;
+    };
+    
+    $("#calculator-form").on("submit", function(event) {
+event.preventDefault();
+// TODO: Find inputted age, calculate # of donuts
+var $age = $(this).find("[name=age]");
+var age = $age.val();
+var $total = calcDonuts(age);
+$("#calculator-results").text("Winston ate " + $total + " donuts");
+});
+    </script>
+    </body>
+</html>
